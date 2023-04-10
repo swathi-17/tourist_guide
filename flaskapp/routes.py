@@ -4,11 +4,17 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flaskapp.forms import RegistrationForm, LoginForm
 from flaskapp.models import User
 
-messages = [{'title': 'Message One',
-             'content': 'Message One Content'},
-            {'title': 'Message Two',
-             'content': 'Message Two Content'}
-            ]
+
+import pandas as pd
+import numpy as np
+from scipy.spatial.distance import cdist
+
+
+# messages = [{'title': 'Message One',
+#              'content': 'Message One Content'},
+#             {'title': 'Message Two',
+#              'content': 'Message Two Content'}
+#             ]
 
 
 @app.route("/index", methods=['get', 'post'])
@@ -19,19 +25,13 @@ def index():
         address = request.form['address']
         price = request.form['price']
 
-        if not category:
-            flash('Category is required!')
-        elif not address:
-            flash('Address is required!')
-        elif not price:
-            flash('Price is required!')
-        else:
-            messages.append({'category': category, 'address': address, 'price': price})
-            # return redirect(url_for('category'), messages=messages)
+        latitude = request.json['latitude']
+        longitude = request.json['longitude']
+
+        
     return render_template('index.html', 
         cat=[{'cat': 'Attractions'}, {'cat': 'Restaurants'}, {'cat': 'Hotels'}],
         prc=[{'prc': '100-500'}, {'prc': '500-1000'}, {'prc': '1000-3000'}, {'prc': '3000-more'}],
-        messages = messages
     )
     
 @app.route("/category")
