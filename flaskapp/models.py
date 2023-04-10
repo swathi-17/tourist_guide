@@ -39,7 +39,7 @@ class Restaurant(db.Model):
     def __repr__(self):
         return f"Restaurant('{self.Restaurant_name}', '{self.Locality}')"
 
-class Hotel():
+class Attraction():
     hotel_id = db.Column(db.Integer, primary_key=True)
     property_name = db.Column(db.String(50))
     address = db.Column(db.String(50))
