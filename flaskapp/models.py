@@ -2,7 +2,7 @@
 from flaskapp import db, login_manager
 from flaskapp import db
 from flask_login import UserMixin
-
+from sqlalchemy.dialects.postgresql import ARRAY
 
 @login_manager.user_loader
 def load_user(user_id):
